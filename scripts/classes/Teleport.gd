@@ -6,6 +6,6 @@ extends Interact
 
 func interact() -> void:
 	super()
-	#SoundManager.play_sfx("UIPress")
+	SoundManager.play_sfx("UIPress")
 	Game.change_scene(path, entry_point) #{entry_point=entry_point}
 	print("[传送] %s" %entry_point)
