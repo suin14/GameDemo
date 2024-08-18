@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c2yd1untpfenf"]
+[gd_scene load_steps=17 format=3 uid="uid://c2yd1untpfenf"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_vbyy4"]
 [ext_resource type="Texture2D" uid="uid://dr26nlpffumm1" path="res://assets/character/idle.png" id="2_s75rg"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scripts/states/Idle.gd" id="5_6qcuu"]
 [ext_resource type="Script" path="res://scripts/states/Walk.gd" id="6_2y1k5"]
 [ext_resource type="Texture2D" uid="uid://cyjmfc6k2jbia" path="res://assets/ui/Base-01.png" id="7_xg8up"]
+[ext_resource type="PackedScene" uid="uid://r3280m3i0t4o" path="res://scenes/UI/pause_menu.tscn" id="8_67h7w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sl3gb"]
 size = Vector2(18, 14)
@@ -213,6 +214,12 @@ libraries = {
 "": SubResource("AnimationLibrary_thkme")
 }
 
+[node name="InteractionIcon" type="Sprite2D" parent="."]
+position = Vector2(0, -23)
+texture = ExtResource("7_xg8up")
+region_enabled = true
+region_rect = Rect2(6, 227, 5, 9)
+
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("player", "initial_state")]
 script = ExtResource("4_05u2h")
 player = NodePath("..")
@@ -224,8 +231,6 @@ script = ExtResource("5_6qcuu")
 [node name="Walk" type="Node" parent="StateMachine"]
 script = ExtResource("6_2y1k5")
 
-[node name="InteractionIcon" type="Sprite2D" parent="."]
-position = Vector2(0, -23)
-texture = ExtResource("7_xg8up")
-region_enabled = true
-region_rect = Rect2(6, 227, 5, 9)
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("8_67h7w")]
