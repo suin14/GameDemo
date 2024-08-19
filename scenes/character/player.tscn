@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c2yd1untpfenf"]
+[gd_scene load_steps=21 format=3 uid="uid://c2yd1untpfenf"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_vbyy4"]
 [ext_resource type="Texture2D" uid="uid://dr26nlpffumm1" path="res://assets/character/idle.png" id="2_s75rg"]
@@ -8,6 +8,9 @@
 [ext_resource type="Script" path="res://scripts/states/Walk.gd" id="6_2y1k5"]
 [ext_resource type="Texture2D" uid="uid://cyjmfc6k2jbia" path="res://assets/ui/Base-01.png" id="7_xg8up"]
 [ext_resource type="PackedScene" uid="uid://r3280m3i0t4o" path="res://scenes/UI/pause_menu.tscn" id="8_67h7w"]
+[ext_resource type="Script" path="res://scripts/classes/time_system.gd" id="9_erduq"]
+[ext_resource type="PackedScene" uid="uid://8tg8v7k71k62" path="res://scenes/UI/time_ui.tscn" id="10_mmx0f"]
+[ext_resource type="Script" path="res://scripts/classes/date_time.gd" id="10_ug1af"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sl3gb"]
 size = Vector2(18, 14)
@@ -194,6 +197,13 @@ _data = {
 "move_up": SubResource("Animation_sgxmy")
 }
 
+[sub_resource type="Resource" id="Resource_576k5"]
+script = ExtResource("10_ug1af")
+seconds = 0
+minutes = 0
+hours = 0
+days = 1
+
 [node name="player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_vbyy4")
@@ -232,7 +242,24 @@ script = ExtResource("5_6qcuu")
 [node name="Walk" type="Node" parent="StateMachine"]
 script = ExtResource("6_2y1k5")
 
+[node name="TimeSystem" type="Node" parent="."]
+script = ExtResource("9_erduq")
+date_time = SubResource("Resource_576k5")
+ticks_pre_second = 120
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
+
+[node name="TimeGUI" parent="CanvasLayer" instance=ExtResource("10_mmx0f")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -72.0
+offset_top = 8.0
+offset_right = -72.0
+offset_bottom = 8.0
+grow_horizontal = 0
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("8_67h7w")]
+visible = false
+
+[connection signal="updated" from="TimeSystem" to="CanvasLayer/TimeGUI" method="_on_time_system_updated"]

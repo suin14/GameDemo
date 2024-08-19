@@ -11,6 +11,8 @@ var interacting_with: Array[Interact]
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var interaction_icon: Sprite2D = $InteractionIcon
 @onready var pause_menu: Control = $CanvasLayer/PauseMenu
+@onready var time_gui: Control = $CanvasLayer/TimeGUI
+@onready var time_system: TimeSystem = $TimeSystem
 
 
 func _unhandled_input(event: InputEvent) -> void:
