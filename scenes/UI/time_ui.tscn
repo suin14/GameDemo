@@ -36,17 +36,21 @@ grow_horizontal = 2
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
+[node name="PanelContainer" type="PanelContainer" parent="DateControl/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="Weather" type="Sprite2D" parent="DateControl/HBoxContainer/PanelContainer"]
+position = Vector2(6, 10)
+texture = ExtResource("1_u75mk")
+region_enabled = true
+region_rect = Rect2(48, 0, 16, 16)
+
 [node name="Date" type="Label" parent="DateControl/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "999"
 label_settings = ExtResource("2_doeyt")
-
-[node name="Weather" type="Sprite2D" parent="DateControl/HBoxContainer"]
-position = Vector2(40, 10)
-texture = ExtResource("1_u75mk")
-region_enabled = true
-region_rect = Rect2(48, 0, 16, 16)
 
 [node name="ClockBG" type="NinePatchRect" parent="."]
 layout_mode = 0
