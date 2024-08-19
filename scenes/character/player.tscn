@@ -197,6 +197,7 @@ _data = {
 [node name="player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_vbyy4")
+MOVE_SPEED = 140.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-1, -7)
@@ -232,5 +233,6 @@ script = ExtResource("5_6qcuu")
 script = ExtResource("6_2y1k5")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("8_67h7w")]
