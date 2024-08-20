@@ -44,7 +44,13 @@ func change_scene(path: String, params := {}) -> void:
 
 
 func new_game() -> void:
-	change_scene("res://scenes/room.tscn", {entry_point="StartPoint"})
+	time_system.date_time.days = 1
+	time_system.date_time.hours = 0
+	time_system.date_time.minutes = 0
+	change_scene("res://scenes/room.tscn", {
+		entry_point = "StartPoint", 
+		date_time = {}
+	})
 
 func back_to_title() -> void:
 	change_scene("res://scenes/UI/title_menu.tscn", {})
@@ -61,11 +67,6 @@ func save_game() -> void:
 				x = scene.player.global_position.x,
 				y = scene.player.global_position.y
 			}
-		},
-		date_time = {
-			days = time_system.date_time.days,
-			hours = time_system.date_time.hours,
-			minutes = time_system.date_time.minutes
 		}
 	}
 	var json := JSON.stringify(data)
