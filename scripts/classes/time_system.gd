@@ -14,7 +14,3 @@ func _process(delta: float) -> void:
 
 	date_time.increase_by_sec(delta * ticks_pre_second)
 	updated.emit(date_time)
-
-
-func skip_time(skip_minutes: int) -> void:
-	date_time.minutes += skip_minutes

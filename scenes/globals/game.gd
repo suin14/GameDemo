@@ -4,11 +4,14 @@ const SAVE_PATH := "user://data.sav"
 const CONFIG_PATH := "user://config.ini"
 
 @onready var color_rect: ColorRect = $Black/ColorRect
+@onready var time_system: TimeSystem = $TimeSystem
+@onready var time_gui: Control = $Black/TimeGUI
 
 
 func _ready() -> void:
 	color_rect.color.a = 0
 	Game.load_config()
+	time_gui.visible = false
 
 func change_scene(path: String, params := {}) -> void:
 	var tree := get_tree()
@@ -22,12 +25,7 @@ func change_scene(path: String, params := {}) -> void:
 	
 	tree.change_scene_to_file(path)
 	await tree.tree_changed
-	
-	#for node in tree.get_nodes_in_group("entry_points"):
-		#if node.name == entry_point:
-			#tree.current_scene.update_player(node.global_position)
-			#break
-			
+
 	if tree.current_scene is Locations:
 		if "entry_point" in params:
 			for node in tree.get_nodes_in_group("entry_points"):
@@ -63,6 +61,11 @@ func save_game() -> void:
 				x = scene.player.global_position.x,
 				y = scene.player.global_position.y
 			}
+		},
+		date_time = {
+			days = time_system.date_time.days,
+			hours = time_system.date_time.hours,
+			minutes = time_system.date_time.minutes
 		}
 	}
 	var json := JSON.stringify(data)
@@ -78,6 +81,10 @@ func load_game() -> void:
 	
 	var json := file.get_as_text()
 	var data := JSON.parse_string(json) as Dictionary
+	
+	time_system.date_time.days = data.date_time.days
+	time_system.date_time.hours = data.date_time.hours
+	time_system.date_time.minutes = data.date_time.minutes
 	
 	change_scene(data.scene, {
 		direction = data.player.direction,
@@ -116,3 +123,7 @@ func load_config() -> void:
 		SoundManager.Bus.BGM,
 		config.get_value("audio", "bgm", 1.0)
 	)
+
+
+func skip_time(skip_minutes: int) -> void:
+	time_system.date_time.minutes += skip_minutes
