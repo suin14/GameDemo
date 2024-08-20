@@ -17,7 +17,7 @@ func physics_update(_delta: float):
 			player.direction = "down"
 		elif player.velocity.y < 0:
 			player.direction = "up"
-		player.animation_player.play("move_" + player.direction)
+		player.animation_player.play("walk_" + player.direction)
 			
 	else:
 		player.velocity = Vector2.ZERO

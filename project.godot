@@ -22,8 +22,8 @@ SoundManager="*res://scenes/globals/sound_manager.tscn"
 
 [display]
 
-window/size/viewport_width=384
-window/size/viewport_height=216
+window/size/viewport_width=512
+window/size/viewport_height=288
 window/size/always_on_top=true
 window/size/window_width_override=1152
 window/size/window_height_override=648
