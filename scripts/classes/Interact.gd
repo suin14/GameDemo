@@ -16,6 +16,7 @@ func _init() -> void:
 func interact() -> void:
 	print("[交互] %s" % name)
 	interacted.emit()
+	Game.do_interact()
 	
 func _on_body_entered(player: Player) -> void:
 	player.register_interactable(self)

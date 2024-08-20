@@ -17,7 +17,7 @@ func _ready() -> void:
 	Game.time_gui.visible = true
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("interact") and interacting_with:
+	if event.is_action_pressed("interact") and interacting_with and Game.can_interact:
 		interacting_with.back().interact()
 		
 	if event.is_action_pressed("pause"):

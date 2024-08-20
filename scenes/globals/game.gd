@@ -7,6 +7,7 @@ const CONFIG_PATH := "user://config.ini"
 @onready var time_system: TimeSystem = $TimeSystem
 @onready var time_gui: Control = $Black/TimeGUI
 
+var can_interact: bool = true
 
 func _ready() -> void:
 	color_rect.color.a = 0
@@ -128,3 +129,12 @@ func load_config() -> void:
 
 func skip_time(skip_minutes: int) -> void:
 	time_system.date_time.minutes += skip_minutes
+	
+
+func do_interact() -> void:
+	Game.time_system.time_paused = true
+	Game.can_interact = false
+
+func done_interact() -> void:
+	Game.time_system.time_paused = false
+	Game.can_interact = true
