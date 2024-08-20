@@ -9,3 +9,4 @@ func interact() -> void:
 	SoundManager.play_sfx("UIPress")
 	Game.change_scene(path, {entry_point=entry_point})
 	print("[传送] %s" %entry_point)
+	Game.done_action()

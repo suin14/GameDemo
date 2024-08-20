@@ -68,6 +68,11 @@ func save_game() -> void:
 				x = scene.player.global_position.x,
 				y = scene.player.global_position.y
 			}
+		},
+		date_time = {
+			days = time_system.date_time.days,
+			hours = time_system.date_time.hours,
+			minutes = time_system.date_time.minutes
 		}
 	}
 	var json := JSON.stringify(data)
@@ -131,10 +136,10 @@ func skip_time(skip_minutes: int) -> void:
 	time_system.date_time.minutes += skip_minutes
 	
 
-func do_interact() -> void:
+func doing_action() -> void:
 	Game.time_system.time_paused = true
 	Game.can_interact = false
 
-func done_interact() -> void:
+func done_action() -> void:
 	Game.time_system.time_paused = false
 	Game.can_interact = true
