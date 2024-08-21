@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="DialogicStyle" load_steps=3 format=3 uid="uid://b2wcup3b48h11"]
+
+[ext_resource type="PackedScene" path="res://assets/ui/dialogue/CustomDialogueBox/custom_dialogue_box.tscn" id="1_68u52"]
+[ext_resource type="Script" path="res://addons/dialogic/Resources/dialogic_style.gd" id="10_ffpte"]
+
+[resource]
+script = ExtResource("10_ffpte")
+name = "dialogue_box"
+base_scene = ExtResource("1_68u52")
+base_overrides = {
+"global_font": "\"res://assets/front/YuFanZhenSu.otf\"",
+"global_font_size": "10.0"
+}
+layers = Array[Resource("res://addons/dialogic/Resources/dialogic_style_layer.gd")]([])
+metadata/_latest_layer = -1

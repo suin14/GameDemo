@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c2yd1untpfenf"]
+[gd_scene load_steps=21 format=3 uid="uid://c2yd1untpfenf"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_vbyy4"]
 [ext_resource type="Texture2D" uid="uid://bpevn10w6t0ic" path="res://assets/character/3248/Pink/pink_8direction_standing-Sheet.png" id="2_qwkrb"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scripts/states/Walk.gd" id="6_2y1k5"]
 [ext_resource type="Texture2D" uid="uid://cyjmfc6k2jbia" path="res://assets/ui/Base-01.png" id="7_xg8up"]
 [ext_resource type="PackedScene" uid="uid://r3280m3i0t4o" path="res://scenes/UI/pause_menu.tscn" id="8_67h7w"]
+[ext_resource type="PackedScene" uid="uid://boy1u2u2imopn" path="res://scenes/UI/avatar_box.tscn" id="11_igmnq"]
 [ext_resource type="Texture2D" uid="uid://ciwet8u2fa6h4" path="res://assets/character/3248/Pink/pink_walk_WEST-Sheet.png" id="13_sbpak"]
 [ext_resource type="Texture2D" uid="uid://drpgscx4hs0fs" path="res://assets/character/3248/Pink/pink_walk_EAST-Sheet.png" id="14_j7tt5"]
 [ext_resource type="Texture2D" uid="uid://cpfgxuro7yv0r" path="res://assets/character/3248/Pink/pink_walk_NORTH-Sheet.png" id="15_w7ajf"]
@@ -354,4 +355,7 @@ script = ExtResource("6_2y1k5")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="AvatarBox" parent="CanvasLayer" instance=ExtResource("11_igmnq")]
+
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("8_67h7w")]
+visible = false

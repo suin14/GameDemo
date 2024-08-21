@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dmh2gtg2tc3qm"]
+[gd_scene load_steps=7 format=3 uid="uid://dmh2gtg2tc3qm"]
 
 [ext_resource type="Script" path="res://scenes/globals/game.gd" id="1_1fjge"]
 [ext_resource type="PackedScene" uid="uid://8tg8v7k71k62" path="res://scenes/UI/time_ui.tscn" id="2_2i6s7"]
 [ext_resource type="Script" path="res://scripts/classes/time_system.gd" id="2_g8t62"]
 [ext_resource type="Script" path="res://scripts/classes/date_time.gd" id="3_mr3lp"]
+[ext_resource type="Script" path="res://scripts/classes/Status.gd" id="5_twka0"]
 
 [sub_resource type="Resource" id="Resource_iykmv"]
 script = ExtResource("3_mr3lp")
@@ -15,10 +16,10 @@ days = 1
 [node name="Game" type="Node"]
 script = ExtResource("1_1fjge")
 
-[node name="Black" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
 layer = 99
 
-[node name="TimeGUI" parent="Black" instance=ExtResource("2_2i6s7")]
+[node name="TimeGUI" parent="UI" instance=ExtResource("2_2i6s7")]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -28,7 +29,7 @@ offset_right = -72.0
 offset_bottom = 8.0
 grow_horizontal = 0
 
-[node name="ColorRect" type="ColorRect" parent="Black"]
+[node name="Black" type="ColorRect" parent="UI"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -42,4 +43,7 @@ script = ExtResource("2_g8t62")
 date_time = SubResource("Resource_iykmv")
 ticks_pre_second = 120
 
-[connection signal="updated" from="TimeSystem" to="Black/TimeGUI" method="_on_time_system_updated"]
+[node name="PlayerStatus" type="Node" parent="."]
+script = ExtResource("5_twka0")
+
+[connection signal="updated" from="TimeSystem" to="UI/TimeGUI" method="_on_time_system_updated"]

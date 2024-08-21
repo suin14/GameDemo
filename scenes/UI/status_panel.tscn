@@ -1,0 +1,95 @@
+[gd_scene load_steps=5 format=3 uid="uid://bylo6hoig4ari"]
+
+[ext_resource type="Script" path="res://scenes/UI/status_panel.gd" id="1_1tp6c"]
+[ext_resource type="Texture2D" uid="uid://cyjmfc6k2jbia" path="res://assets/ui/Base-01.png" id="1_w441h"]
+[ext_resource type="Theme" uid="uid://di3dmoihncqyo" path="res://assets/main_theme.tres" id="2_1irqm"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ougx7"]
+content_margin_left = 16.0
+content_margin_top = 4.0
+content_margin_right = 16.0
+content_margin_bottom = 4.0
+texture = ExtResource("1_w441h")
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+region_rect = Rect2(0, 0, 64, 64)
+
+[node name="StatusPanel" type="PanelContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -74.0
+offset_right = 104.0
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_ougx7")
+script = ExtResource("1_1tp6c")
+
+[node name="G" type="GridContainer" parent="."]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_1irqm")
+theme_override_constants/h_separation = 8
+columns = 2
+
+[node name="金钱" type="Label" parent="G"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 18
+text = "金钱："
+
+[node name="MoneyLabel" type="Label" parent="G"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 18
+
+[node name="健康值" type="Label" parent="G"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 18
+text = "健康："
+
+[node name="HealthLabel" type="Label" parent="G"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 18
+
+[node name="饱食" type="Label" parent="G"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 18
+text = "饥饿："
+
+[node name="HungryLabel" type="Label" parent="G"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 18
+
+[node name="理智" type="Label" parent="G"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 18
+text = "健康："
+
+[node name="SanityLabel" type="Label" parent="G"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 18

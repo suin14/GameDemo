@@ -24,10 +24,11 @@ Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 [dialogic]
 
 directories/dch_directory={
-"unit_test_character": "res://Tests/Resources/unit_test_character.dch"
+"character/unit_test_character": "res://assets/character/unit_test_character.dch"
 }
 directories/dtl_directory={
-"Bed_sleep": "res://content/request/Bed_sleep.dtl"
+"Bed_sleep": "res://content/request/Bed_sleep.dtl",
+"test_dialogue": "res://content/test_dialogue.dtl"
 }
 text/letter_speed=0.01
 text/initial_text_reveal_skippable=true
@@ -53,15 +54,16 @@ translation/save_mode=0
 translation/add_separator=false
 text/autopauses={}
 variables={}
-layout/style_list=["res://assets/ui/dialog_box.tres"]
-layout/default_style="res://assets/ui/dialog_box.tres"
+layout/style_list=["res://assets/ui/dialogue/dialogue_style.tres", "res://assets/ui/dialogue/default_style.tres"]
+layout/default_style="res://assets/ui/dialogue/default_style.tres"
 glossary/default_case_sensitive=true
 layout/end_behaviour=0
 text/autocolor_names=false
 text/input_action="dialogic_default_action"
 timer/process_in_physics=false
 save/autosave=true
-text/autoadvance_enabled=true
+text/autoadvance_enabled=false
+animations/join_default="res://addons/dialogic/Modules/Character/DefaultAnimations/zoom_in.gd"
 
 [display]
 

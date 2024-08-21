@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://boy1u2u2imopn"]
+
+[ext_resource type="Script" path="res://scenes/UI/avatar_box.gd" id="1_bc2mj"]
+[ext_resource type="Texture2D" uid="uid://cyjmfc6k2jbia" path="res://assets/ui/Base-01.png" id="2_3u6nt"]
+[ext_resource type="Texture2D" uid="uid://cwcifme16tp3y" path="res://assets/character/Girl With Beret Portraits display.png" id="3_n8cvl"]
+[ext_resource type="PackedScene" uid="uid://bylo6hoig4ari" path="res://scenes/UI/status_panel.tscn" id="4_70uvi"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6lksx"]
+content_margin_left = 3.0
+content_margin_top = 5.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+texture = ExtResource("2_3u6nt")
+region_rect = Rect2(323, 203, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n1phb"]
+atlas = ExtResource("3_n8cvl")
+region = Rect2(0, 0, 64, 64)
+
+[node name="AvatarPanel" type="HBoxContainer"]
+offset_right = 70.0
+offset_bottom = 72.0
+script = ExtResource("1_bc2mj")
+
+[node name="AvatarBox" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_6lksx")
+
+[node name="Avatar" type="TextureButton" parent="AvatarBox"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_n1phb")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="StatusPanel" parent="CanvasLayer" instance=ExtResource("4_70uvi")]
+process_mode = 2
+
+[connection signal="pressed" from="AvatarBox/Avatar" to="." method="_on_avatar_pressed"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bb84emqmmlrk4"
-path="res://.godot/imported/run.png-53dd00e1244eee0c3fa7d5dae6f8422a.ctex"
+uid="uid://cwcifme16tp3y"
+path="res://.godot/imported/Girl With Beret Portraits display.png-8ff0a6c223fc0af99b8e73e5478978b6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/character/run.png"
-dest_files=["res://.godot/imported/run.png-53dd00e1244eee0c3fa7d5dae6f8422a.ctex"]
+source_file="res://assets/character/Girl With Beret Portraits display.png"
+dest_files=["res://.godot/imported/Girl With Beret Portraits display.png-8ff0a6c223fc0af99b8e73e5478978b6.ctex"]
 
 [params]
 
