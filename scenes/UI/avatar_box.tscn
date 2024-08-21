@@ -33,6 +33,5 @@ texture_normal = SubResource("AtlasTexture_n1phb")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="StatusPanel" parent="CanvasLayer" instance=ExtResource("4_70uvi")]
-process_mode = 2
 
 [connection signal="pressed" from="AvatarBox/Avatar" to="." method="_on_avatar_pressed"]

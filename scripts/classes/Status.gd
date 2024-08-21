@@ -30,7 +30,7 @@ var max_money: int  = 999999999
 
 @onready var tired: float = max_tired:     #疲劳值
 	set(v):
-		v = clampi(v, 0, max_tired)
+		v = clampf(v, 0, max_tired)
 		if tired == v: return
 		tired = v
 		tired_changed.emit()
@@ -52,7 +52,7 @@ var max_money: int  = 999999999
 
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func to_dict() -> Dictionary:

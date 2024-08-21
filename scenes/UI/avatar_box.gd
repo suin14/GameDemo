@@ -1,6 +1,6 @@
 extends Control
 
-@onready var status_panel: status_panel = $CanvasLayer/StatusPanel
+@onready var status_panel: StatusPanel = $CanvasLayer/StatusPanel
 
 
 func _on_avatar_pressed() -> void:

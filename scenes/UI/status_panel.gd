@@ -1,8 +1,9 @@
-class_name status_panel
+class_name StatusPanel
 extends PanelContainer
 
 @export var status: Status
 
+@onready var status_panel: StatusPanel = $"."
 @onready var money_label: Label = $G/MoneyLabel
 @onready var health_label: Label = $G/HealthLabel
 @onready var hungry_label: Label = $G/HungryLabel
@@ -10,21 +11,11 @@ extends PanelContainer
 
 
 func _ready() -> void:
-	hide()
 	if not status:
 		status = Game.player_status
 
-	status.money_changed.connect(update_money)
-	update_money()
-	
-	status.health_changed.connect(update_health)
-	update_health()
-	
-	status.hungry_changed.connect(update_hungry)
-	update_hungry()
-	
-	status.sanity_changed.connect(update_sanity)
-	update_sanity()
+	hide()
+	update_status()
 	
 	visibility_changed.connect(func ():
 		get_tree().paused = visible
@@ -38,10 +29,23 @@ func _ready() -> void:
 	)
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("pause") or event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed("ui_cancel") and status_panel.visible == true:
 		hide()
 		get_window().set_input_as_handled()
 
+
+func update_status() -> void:
+	status.money_changed.connect(update_money)
+	update_money()
+	
+	status.health_changed.connect(update_health)
+	update_health()
+	
+	status.hungry_changed.connect(update_hungry)
+	update_hungry()
+	
+	status.sanity_changed.connect(update_sanity)
+	update_sanity()
 
 func update_money() -> void:
 	money_label.text = str(status.money)
