@@ -1,7 +1,7 @@
 class_name StatusPanel
 extends PanelContainer
 
-@export var status: Status
+@export var status: Node
 
 @onready var status_panel: StatusPanel = $"."
 @onready var money_label: Label = $G/MoneyLabel
@@ -12,7 +12,7 @@ extends PanelContainer
 
 func _ready() -> void:
 	if not status:
-		status = Game.player_status
+		status = PlayerStatus
 
 	hide()
 	update_status()

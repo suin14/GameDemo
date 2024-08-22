@@ -4,7 +4,6 @@ extends Interact
 func interact() -> void:
 	super()
 	#Dialogic.start("Bed_sleep")
-	print(Game.player_status.money)
-	Game.player_status.money += 100
-	print(Game.player_status.money)
+	PlayerStatus.money += 100
+	Game.done_action()
 	#Game.save_game()

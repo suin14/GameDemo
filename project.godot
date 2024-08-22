@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 Game="*res://scenes/globals/game.tscn"
 SoundManager="*res://scenes/globals/sound_manager.tscn"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
+PlayerStatus="*res://scenes/globals/player_status.tscn"
 
 [dialogic]
 

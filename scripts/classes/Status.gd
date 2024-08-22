@@ -1,4 +1,4 @@
-class_name Status extends Node
+extends Node
 
 signal money_changed
 signal health_changed
@@ -6,7 +6,7 @@ signal tired_changed
 signal hungry_changed
 signal sanity_changed
 
-@export var money_init: int = 1000
+@export var init_money: int = 1000
 @export var max_health: int = 100
 @export var max_tired: float = 100.0
 @export var max_hungry: int = 100
@@ -14,7 +14,7 @@ signal sanity_changed
 
 var max_money: int  = 999999999
 
-@onready var money: int = money_init:     #金钱
+@onready var money: int = init_money:     #金钱
 	set(v):
 		v = clampi(v, 0, max_money)
 		if money == v: return
@@ -50,18 +50,28 @@ var max_money: int  = 999999999
 		sanity_changed.emit()
 
 
-
-
-func _process(_delta: float) -> void:
-	pass
-
 func to_dict() -> Dictionary:
 	return {
-		max_health = max_health,
-		health = health
+		money = money,
+		health = health,
+		tired = tired,
+		hungry = hungry,
+		sanity = sanity
 	}
 	
 func from_dict(dict: Dictionary) -> void:
-	max_health = dict.max_health
+	money = dict.money
 	health = dict.health
+	tired = dict.tired
+	hungry = dict.hungry
+	sanity = dict.sanity
+
+func init_status() -> Dictionary:
+	return {
+		money = init_money,
+		health = max_health,
+		tired = max_tired,
+		hungry = max_hungry,
+		sanity = max_sanity
+	}
 

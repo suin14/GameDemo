@@ -6,8 +6,7 @@ const CONFIG_PATH := "user://config.ini"
 @onready var black: ColorRect = $UI/Black
 @onready var time_system: TimeSystem = $TimeSystem
 @onready var time_gui: Control = $UI/TimeGUI
-@onready var player_status: Status = $PlayerStatus
-
+@onready var default_player_status: Dictionary = PlayerStatus.init_status()
 
 
 var can_interact: bool = true
@@ -27,6 +26,9 @@ func change_scene(path: String, params := {}) -> void:
 	tween.tween_property(black, "color:a", 1, 0.2)
 	await tween.finished
 	
+	if "init" in params:
+		params.init.call()
+		
 	tree.change_scene_to_file(path)
 	await tree.tree_changed
 
@@ -46,18 +48,19 @@ func change_scene(path: String, params := {}) -> void:
 	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.tween_property(black, "color:a", 0, 0.2)
 
-
-func new_game() -> void:
-	time_system.date_time.days = 1
-	time_system.date_time.hours = 0
-	time_system.date_time.minutes = 0
-	change_scene("res://scenes/room.tscn", {
-		entry_point = "StartPoint", 
-		date_time = {}
-	})
-
 func back_to_title() -> void:
 	change_scene("res://scenes/UI/title_menu.tscn", {})
+
+
+func new_game() -> void:
+	change_scene("res://scenes/room.tscn", {
+		entry_point = "StartPoint", 
+		init = func():
+			PlayerStatus.from_dict(default_player_status)
+			time_system.date_time.days = 1
+			time_system.date_time.hours = 0
+			time_system.date_time.minutes = 0
+	})
 
 
 func save_game() -> void:
@@ -65,17 +68,14 @@ func save_game() -> void:
 	
 	var data := {
 		scene = scene.scene_file_path,
+		status = PlayerStatus.to_dict(),
+		date_time = time_system.to_dict(),
 		player = {
 			direction = scene.player.direction,
 			position = {
 				x = scene.player.global_position.x,
 				y = scene.player.global_position.y
 			}
-		},
-		date_time = {
-			days = time_system.date_time.days,
-			hours = time_system.date_time.hours,
-			minutes = time_system.date_time.minutes
 		}
 	}
 	var json := JSON.stringify(data)
@@ -101,7 +101,10 @@ func load_game() -> void:
 		position = Vector2(
 			data.player.position.x,
 			data.player.position.y
-		)
+		),
+		init = func():
+			PlayerStatus.from_dict(data.status)
+			time_system.from_dict(data.date_time)
 	})
 
 func has_save() -> bool:
