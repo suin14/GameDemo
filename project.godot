@@ -24,13 +24,16 @@ Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 [dialogic]
 
 directories/dch_directory={
-"character/unit_test_character": "res://assets/character/unit_test_character.dch"
+"UnknownNpc": "res://assets/character/UnknownNpc.dch",
+"character/unit_test_character": "res://assets/character/unit_test_character.dch",
+"player": "res://assets/character/player/player.dch"
 }
 directories/dtl_directory={
 "Bed_sleep": "res://content/request/Bed_sleep.dtl",
+"story-00": "res://content/dialogue/story-00.dtl",
 "test_dialogue": "res://content/test_dialogue.dtl"
 }
-text/letter_speed=0.01
+text/letter_speed=0.03
 text/initial_text_reveal_skippable=true
 text/text_reveal_skip_delay=0.1
 text/advance_delay=0.1
