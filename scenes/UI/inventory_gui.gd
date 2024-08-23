@@ -6,6 +6,9 @@ extends Control
 @onready var slots: Array = $NinePatchRect/GridContainer.get_children()
 
 var itemInHand: ItemStackGui
+var old_index: int = -1
+var locked: bool = false
+
 
 func _ready() -> void:
 	hide()
@@ -27,6 +30,9 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if itemInHand and event.is_action_pressed("right_click") and !locked:
+		replaceItem()
+
 	if event.is_action_pressed("toggle_inventory") and inventory_gui.visible == true:
 		hide()
 		get_window().set_input_as_handled()
@@ -49,6 +55,7 @@ func update():
 
 
 func clickedSlot(slot):
+	if locked: return
 	if slot.isEmpty():
 		if !itemInHand: return
 		
@@ -57,11 +64,21 @@ func clickedSlot(slot):
 	
 	if !itemInHand:
 		takeItemFromSlot(slot)
+		return
+	
+	if slot.itemStackGui.inventorySlot.item.display_name == itemInHand.inventorySlot.item.display_name:
+		stackItem(slot)
+		return
+	
+	swapItems(slot)
 
 func takeItemFromSlot(slot):
 	itemInHand = slot.takeItem()
 	add_child(itemInHand)
+	
 	updateItemInHand()
+	
+	old_index = slot.index
 
 func insertItemInSlot(slot):
 	var item = itemInHand
@@ -70,9 +87,58 @@ func insertItemInSlot(slot):
 	itemInHand = null
 	
 	slot.insert(item)
+	
+	old_index = -1
 
 func updateItemInHand():
 	if !itemInHand: return
 	itemInHand.global_position = get_global_mouse_position() - itemInHand.size / 2
+
+func swapItems(slot):
+	var tmpItem = slot.takeItem()
+	
+	insertItemInSlot(slot)
+	
+	itemInHand = tmpItem
+	add_child(itemInHand)
+	updateItemInHand()
+
+func replaceItem():
+	locked = true
+	if old_index < 0:  # 旧槽位被其他物品占用
+		var emptySlots = slots.filter(func(slot): return slot.isEmpty())
+		if emptySlots.is_empty(): return
+		old_index = emptySlots[0].index
+	
+	var targetSlot = slots[old_index]
+	
+	var tween = create_tween()
+	var targetPosition = targetSlot.global_position + targetSlot.size / 2
+	tween.tween_property(itemInHand, "global_position", targetPosition, 0.1)
+	await tween.finished
+	insertItemInSlot(targetSlot)
+	locked = false
+
+
+func stackItem(slot):
+	var slotItem: ItemStackGui = slot.itemStackGui
+	var maxAmount = slotItem.inventorySlot.item.maxAmountPrStack
+	var totalAmount = slotItem.inventorySlot.amount + itemInHand.inventorySlot.amount
+	
+	if slotItem.inventorySlot.amount == maxAmount:
+		swapItems(slot)
+		return
+	if totalAmount <= maxAmount:
+		slotItem.inventorySlot.amount = totalAmount
+		remove_child(itemInHand)
+		itemInHand = null
+		old_index = -1
+	else:
+		slotItem.inventorySlot.amount = maxAmount
+		itemInHand.inventorySlot.amount = totalAmount - maxAmount
+	
+	slotItem.update()
+	if itemInHand: itemInHand.update()
+
 
 
