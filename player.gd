@@ -11,7 +11,7 @@ var interacting_with: Array[Interact]
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var interaction_icon: Sprite2D = $InteractionIcon
 @onready var pause_menu: Control = $CanvasLayer/PauseMenu
-
+@onready var inventory_gui: Control = $CanvasLayer/InventoryGui
 
 func _ready() -> void:
 	Game.time_gui.visible = true
@@ -19,7 +19,11 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact") and interacting_with and Game.can_interact:
 		interacting_with.back().interact()
-		
+	
+	if event.is_action_pressed("toggle_inventory"):
+		inventory_gui.show()
+
+	
 	if event.is_action_pressed("pause"):
 		pause_menu.show_menu()
 
