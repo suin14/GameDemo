@@ -5,6 +5,7 @@ extends Control
 @onready var ItemStackGuiClass = preload("res://scenes/UI/item_stack_gui.tscn")
 @onready var slots: Array = $NinePatchRect/GridContainer.get_children()
 
+var itemInHand: ItemStackGui
 
 func _ready() -> void:
 	hide()
@@ -12,7 +13,10 @@ func _ready() -> void:
 		get_tree().paused = visible
 	)
 	
-	for slot in slots:
+	for i in range(slots.size()):
+		var slot = slots[i]
+		slot.index = i
+		
 		var callable = Callable(clickedSlot)
 		callable = callable.bind(slot)
 		slot.pressed.connect(callable)
@@ -26,6 +30,8 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_inventory") and inventory_gui.visible == true:
 		hide()
 		get_window().set_input_as_handled()
+	
+	updateItemInHand()
 
 func update():
 	for i in range(min(inventory.slots.size(), slots.size())):
@@ -43,4 +49,30 @@ func update():
 
 
 func clickedSlot(slot):
-	pass
+	if slot.isEmpty():
+		if !itemInHand: return
+		
+		insertItemInSlot(slot)
+		return
+	
+	if !itemInHand:
+		takeItemFromSlot(slot)
+
+func takeItemFromSlot(slot):
+	itemInHand = slot.takeItem()
+	add_child(itemInHand)
+	updateItemInHand()
+
+func insertItemInSlot(slot):
+	var item = itemInHand
+	
+	remove_child(itemInHand)
+	itemInHand = null
+	
+	slot.insert(item)
+
+func updateItemInHand():
+	if !itemInHand: return
+	itemInHand.global_position = get_global_mouse_position() - itemInHand.size / 2
+
+
