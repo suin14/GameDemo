@@ -1,19 +1,12 @@
-extends Panel
+extends Button
 
 @onready var slotSprite: Sprite2D = $Slot
-@onready var itemSprite: Sprite2D = $CenterContainer/Panel/Item
-@onready var amountLabel: Label = $CenterContainer/Panel/Amount
+@onready var container: CenterContainer = $CenterContainer
 
+var itemStackGui: ItemStackGui
 
-func update(slot: InventorySlot):
-	if !slot.item:
-		slotSprite.frame = 0
-		itemSprite.hide()
-		amountLabel.hide()
-	else:
-		slotSprite.frame = 1
-		itemSprite.show()
-		itemSprite.texture = slot.item.texure
-		amountLabel.show()
-		if slot.amount > 1:
-			amountLabel.text = str(slot.amount)
+func insert(isg: ItemStackGui):
+	itemStackGui = isg
+	slotSprite.frame = 1
+	container.add_child(itemStackGui)
+	

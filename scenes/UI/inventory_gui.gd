@@ -2,6 +2,7 @@ extends Control
 
 @onready var inventory_gui: Control = $"."
 @onready var inventory: Inventory = preload("res://content/data/player_inventory.tres")
+@onready var ItemStackGuiClass = preload("res://scenes/UI/item_stack_gui.tscn")
 @onready var slots: Array = $NinePatchRect/GridContainer.get_children()
 
 
@@ -10,9 +11,16 @@ func _ready() -> void:
 	visibility_changed.connect(func ():
 		get_tree().paused = visible
 	)
-	inventory.updated.connect(update)
-	update()
 	
+	for slot in slots:
+		var callable = Callable(clickedSlot)
+		callable = callable.bind(slot)
+		slot.pressed.connect(callable)
+	
+	inventory.updated.connect(update)
+	
+	update()
+
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_inventory") and inventory_gui.visible == true:
@@ -21,5 +29,18 @@ func _input(event: InputEvent) -> void:
 
 func update():
 	for i in range(min(inventory.slots.size(), slots.size())):
-		slots[i].update(inventory.slots[i])
+		var inventorySlot: InventorySlot = inventory.slots[i]
+		
+		if !inventorySlot.item: continue
+		
+		var itemStackGui: ItemStackGui = slots[i].itemStackGui
+		if !itemStackGui:
+			itemStackGui = ItemStackGuiClass.instantiate()
+			slots[i].insert(itemStackGui)
+		
+		itemStackGui.inventorySlot = inventorySlot
+		itemStackGui.update()
 
+
+func clickedSlot(slot):
+	pass
