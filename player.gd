@@ -1,7 +1,9 @@
 class_name Player
 extends CharacterBody2D
 
-@export var MOVE_SPEED: float = 100.0
+@export var inventory: Inventory
+
+const MOVE_SPEED: float = 100.0
 
 var move_direction
 var direction : String
@@ -42,3 +44,4 @@ func register_interactable(v: Interact) -> void:
 
 func unregister_interactable(v: Interact) -> void:
 	interacting_with.erase(v)
+

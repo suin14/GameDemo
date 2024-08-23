@@ -1,14 +1,40 @@
-[gd_scene load_steps=2 format=3 uid="uid://bh3qofr7gr16q"]
+[gd_scene load_steps=4 format=3 uid="uid://bh3qofr7gr16q"]
 
+[ext_resource type="Script" path="res://scenes/UI/slot_gui.gd" id="1_1l2k5"]
 [ext_resource type="Texture2D" uid="uid://bgai3q6aqmh4j" path="res://assets/ui/inventorySlot.png" id="1_qpjxo"]
+[ext_resource type="FontFile" uid="uid://bbcwlvanghlhm" path="res://assets/front/Kenney Mini Square.ttf" id="3_xm8mi"]
 
-[node name="Slot" type="Panel"]
+[node name="InventorySlot" type="Panel"]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(20, 20)
 offset_right = 20.0
 offset_bottom = 20.0
+script = ExtResource("1_1l2k5")
 
-[node name="InventorySlot" type="Sprite2D" parent="."]
+[node name="Slot" type="Sprite2D" parent="."]
 texture = ExtResource("1_qpjxo")
 centered = false
 vframes = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 0
+offset_right = 20.0
+offset_bottom = 20.0
+
+[node name="Panel" type="Panel" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Item" type="Sprite2D" parent="CenterContainer/Panel"]
+
+[node name="Amount" type="Label" parent="CenterContainer/Panel"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 0
+offset_left = -3.0
+offset_top = -2.0
+offset_right = 7.0
+offset_bottom = 8.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_xm8mi")
+theme_override_font_sizes/font_size = 8
+horizontal_alignment = 2

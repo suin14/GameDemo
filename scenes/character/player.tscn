@@ -1,6 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://c2yd1untpfenf"]
+[gd_scene load_steps=23 format=3 uid="uid://c2yd1untpfenf"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_vbyy4"]
+[ext_resource type="Resource" uid="uid://6468e4cw0fcv" path="res://content/data/player_inventory.tres" id="2_pfq5o"]
 [ext_resource type="Texture2D" uid="uid://bpevn10w6t0ic" path="res://assets/character/3248/Pink/pink_8direction_standing-Sheet.png" id="2_qwkrb"]
 [ext_resource type="Script" path="res://scripts/states/StateMachine.gd" id="4_05u2h"]
 [ext_resource type="Script" path="res://scripts/states/Idle.gd" id="5_6qcuu"]
@@ -317,7 +318,7 @@ _data = {
 [node name="player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_vbyy4")
-MOVE_SPEED = 140.0
+inventory = ExtResource("2_pfq5o")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -24)
@@ -357,17 +358,19 @@ script = ExtResource("6_2y1k5")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="AvatarBox" parent="CanvasLayer" instance=ExtResource("11_igmnq")]
+visible = false
 
 [node name="InventoryGui" parent="CanvasLayer" instance=ExtResource("13_bgk34")]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -67.0
-offset_top = -41.0
-offset_right = 67.0
-offset_bottom = 41.0
+offset_left = -107.0
+offset_top = -76.5
+offset_right = 107.0
+offset_bottom = 76.5
 size_flags_horizontal = 4
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("8_67h7w")]

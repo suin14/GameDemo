@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://g43pfe0hpudx"]
+[gd_scene load_steps=26 format=3 uid="uid://g43pfe0hpudx"]
 
 [ext_resource type="Script" path="res://scenes/room.gd" id="1_5w0bj"]
 [ext_resource type="Texture2D" uid="uid://dp46dycvsxr82" path="res://assets/map/Top-Down_Retro_Interior/TopDownHouse_DoorsAndWindows.png" id="1_h5vh3"]
@@ -9,9 +9,11 @@
 [ext_resource type="Texture2D" uid="uid://cecxbc25x852w" path="res://assets/map/Inside_C.png" id="6_dqvfl"]
 [ext_resource type="PackedScene" uid="uid://c2yd1untpfenf" path="res://scenes/character/player.tscn" id="7_81d3l"]
 [ext_resource type="Script" path="res://scripts/classes/Teleport.gd" id="10_7hcau"]
+[ext_resource type="Script" path="res://scripts/objects/Bed.gd" id="10_xf1ea"]
 [ext_resource type="Script" path="res://scripts/classes/EntryPoint.gd" id="11_g75xt"]
-[ext_resource type="Script" path="res://scenes/map/objects/Bed.gd" id="11_rrta5"]
-[ext_resource type="Script" path="res://scenes/map/objects/Clock.gd" id="12_3ejjy"]
+[ext_resource type="Script" path="res://scripts/objects/Clock.gd" id="11_xij1m"]
+[ext_resource type="Script" path="res://scripts/objects/Kitchen.gd" id="12_h0awr"]
+[ext_resource type="Resource" uid="uid://3da718uct2i4" path="res://content/objects/fantuan.tres" id="13_v7tlw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v8jo5"]
 texture = ExtResource("1_h5vh3")
@@ -7069,6 +7071,9 @@ size = Vector2(60, 93)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vkmtq"]
 size = Vector2(17.5, 30)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bbytq"]
+size = Vector2(112, 61)
+
 [node name="房间" type="Node2D"]
 script = ExtResource("1_5w0bj")
 
@@ -7100,19 +7105,27 @@ script = ExtResource("11_g75xt")
 
 [node name="Bed" type="Area2D" parent="TileMap"]
 position = Vector2(295, 50)
-script = ExtResource("11_rrta5")
+script = ExtResource("10_xf1ea")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap/Bed"]
 position = Vector2(-8, -3.5)
 shape = SubResource("RectangleShape2D_rtpjl")
 
-[node name="Clock" type="Area2D" parent="."]
+[node name="Clock" type="Area2D" parent="TileMap"]
 position = Vector2(295, 50)
-script = ExtResource("12_3ejjy")
+script = ExtResource("11_xij1m")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Clock"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap/Clock"]
 position = Vector2(9.25, 106)
 shape = SubResource("RectangleShape2D_vkmtq")
+
+[node name="Kitchen" type="Area2D" parent="TileMap"]
+script = ExtResource("12_h0awr")
+item = ExtResource("13_v7tlw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap/Kitchen"]
+position = Vector2(40, 34.5)
+shape = SubResource("RectangleShape2D_bbytq")
 
 [node name="player" parent="." instance=ExtResource("7_81d3l")]
 position = Vector2(224, 80)

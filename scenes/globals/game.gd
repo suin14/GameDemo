@@ -8,7 +8,6 @@ const CONFIG_PATH := "user://config.ini"
 @onready var time_gui: Control = $UI/TimeGUI
 @onready var default_player_status: Dictionary = PlayerStatus.init_status()
 
-
 var can_interact: bool = true
 
 func _ready() -> void:

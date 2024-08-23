@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://3da718uct2i4"]
+
+[ext_resource type="Script" path="res://scripts/classes/inventory_item.gd" id="1_66pgu"]
+[ext_resource type="Texture2D" uid="uid://hjoc8g4ds72o" path="res://assets/objects/Onigiri.png" id="2_licpf"]
+
+[resource]
+script = ExtResource("1_66pgu")
+display_name = "饭团"
+texure = ExtResource("2_licpf")
+maxAmountPrStack = 5
