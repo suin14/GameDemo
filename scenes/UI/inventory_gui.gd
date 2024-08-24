@@ -4,6 +4,11 @@ extends Control
 @onready var inventory: Inventory = preload("res://content/data/player_inventory.tres")
 @onready var ItemStackGuiClass = preload("res://scenes/UI/item_stack_gui.tscn")
 @onready var slots: Array = $NinePatchRect/GridContainer.get_children()
+@onready var item_view: CanvasLayer = $ItemView
+@onready var item_name_label: Label = $ItemView/ItemViewBox/VBoxContainer/ItemNameLabel
+@onready var item_description_label: Label = $ItemView/ItemViewBox/VBoxContainer/ItemDescriptionLabel
+@onready var item_view_box: TextureRect = $ItemView/ItemViewBox
+
 
 var itemInHand: ItemStackGui
 var old_index: int = -1
@@ -12,6 +17,7 @@ var locked: bool = false
 
 func _ready() -> void:
 	hide()
+	item_view.hide()
 	visibility_changed.connect(func ():
 		get_tree().paused = visible
 	)
@@ -24,13 +30,29 @@ func _ready() -> void:
 		callable = callable.bind(slot)
 		slot.pressed.connect(callable)
 	
+	for i in range(slots.size()):
+		var slot = slots[i]
+		slot.index = i
+		
+		var callable = Callable(viewsItem)
+		callable = callable.bind(slot)
+		slot.mouse_entered.connect(callable)
+	
+	for i in range(slots.size()):
+		var slot = slots[i]
+		slot.index = i
+		
+		var callable = Callable(cancelViewsItem)
+		callable = callable.bind(slot)
+		slot.mouse_exited.connect(callable)
+	
 	inventory.updated.connect(update)
 	
 	update()
 
 
 func _input(event: InputEvent) -> void:
-	if itemInHand and event.is_action_pressed("right_click") and !locked:
+	if itemInHand and event.is_action_pressed("ui_cancel") and !locked:
 		replaceItem()
 
 	if event.is_action_pressed("toggle_inventory") and inventory_gui.visible == true:
@@ -38,6 +60,7 @@ func _input(event: InputEvent) -> void:
 		get_window().set_input_as_handled()
 	
 	updateItemInHand()
+
 
 func update():
 	for i in range(min(inventory.slots.size(), slots.size())):
@@ -141,4 +164,18 @@ func stackItem(slot):
 	if itemInHand: itemInHand.update()
 
 
+func viewsItem(slot):
+	if itemInHand or slot.isEmpty(): 
+		item_view.hide()
+		return
+	showItemView(slot.itemStackGui.inventorySlot.item.display_name, slot.itemStackGui.inventorySlot.item.description)
+	item_view_box.position = slot.global_position + slot.size
+
+func showItemView(item_name: String, item_description: String):
+	item_view.show()
+	item_name_label.text = item_name
+	item_description_label.text = item_description
+
+func cancelViewsItem(slot):
+	item_view.hide()
 

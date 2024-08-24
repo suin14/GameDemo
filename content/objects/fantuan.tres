@@ -8,3 +8,4 @@ script = ExtResource("1_66pgu")
 display_name = "饭团"
 texure = ExtResource("2_licpf")
 maxAmountPrStack = 5
+description = "一个普普通通的饭团"

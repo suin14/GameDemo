@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://nwkqe7l1ncwp"]
+[gd_scene load_steps=7 format=3 uid="uid://nwkqe7l1ncwp"]
 
 [ext_resource type="Script" path="res://scenes/UI/inventory_gui.gd" id="1_f1dxc"]
 [ext_resource type="Texture2D" uid="uid://18ksu1k471fk" path="res://assets/ui/InventoryRect.png" id="1_kmnxx"]
 [ext_resource type="PackedScene" uid="uid://bh3qofr7gr16q" path="res://scenes/UI/slot_gui.tscn" id="2_8s32u"]
+[ext_resource type="Texture2D" uid="uid://cyjmfc6k2jbia" path="res://assets/ui/Base-01.png" id="4_lg4sk"]
+[ext_resource type="FontFile" uid="uid://dsut7irxhbwh5" path="res://assets/front/Silver.ttf" id="5_7c20s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h5v3r"]
+atlas = ExtResource("4_lg4sk")
+region = Rect2(243, 203, 58, 26)
 
 [node name="InventoryGui" type="Control"]
 process_mode = 2
@@ -161,3 +167,36 @@ layout_mode = 2
 
 [node name="Slot40" parent="NinePatchRect/GridContainer" instance=ExtResource("2_8s32u")]
 layout_mode = 2
+
+[node name="ItemView" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="ItemViewBox" type="TextureRect" parent="ItemView"]
+offset_left = 223.0
+offset_top = 8.0
+offset_right = 337.0
+offset_bottom = 78.0
+texture = SubResource("AtlasTexture_h5v3r")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ItemView/ItemViewBox"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 8.0
+offset_right = 84.0
+offset_bottom = 50.0
+theme_override_constants/separation = -1
+
+[node name="ItemNameLabel" type="Label" parent="ItemView/ItemViewBox/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("5_7c20s")
+text = "物品名字"
+
+[node name="ItemDescriptionLabel" type="Label" parent="ItemView/ItemViewBox/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_7c20s")
+text = "物品描述"

@@ -4,6 +4,7 @@ extends Button
 @onready var container: CenterContainer = $CenterContainer
 @onready var inventory: Inventory = preload("res://content/data/player_inventory.tres")
 
+
 var itemStackGui: ItemStackGui
 var index: int
 
