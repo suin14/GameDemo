@@ -12,6 +12,7 @@ var index: int
 func insert(isg: ItemStackGui):
 	itemStackGui = isg
 	slotSprite.frame = 1
+	
 	container.add_child(itemStackGui)
 	
 	if !itemStackGui.inventorySlot or inventory.slots[index] == itemStackGui.inventorySlot: return

@@ -39,7 +39,7 @@ func change_scene(path: String, params := {}) -> void:
 					break
 		
 		if "position" in params:
-			print(params.position)
+			print("change_scene.pos：" + str(params.position))
 			tree.current_scene.update_player(params.position)
 
 	tree.paused = false

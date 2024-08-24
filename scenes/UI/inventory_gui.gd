@@ -175,6 +175,6 @@ func showItemView(item_name: String, item_description: String):
 	item_name_label.text = item_name
 	item_description_label.text = item_description
 
-func cancelViewsItem(slot):
+func cancelViewsItem(_slot):
 	item_view.hide()
 
