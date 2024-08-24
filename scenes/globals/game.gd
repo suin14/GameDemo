@@ -38,8 +38,9 @@ func change_scene(path: String, params := {}) -> void:
 					tree.current_scene.update_player(node.global_position)
 					break
 		
-		if "position" in params:  #and "direction" in params
-			tree.current_scene.update_player(params.position)  #, params.direction
+		if "position" in params:
+			print(params.position)
+			tree.current_scene.update_player(params.position)
 
 	tree.paused = false
 	# 转场结束动画
@@ -64,7 +65,6 @@ func new_game() -> void:
 
 func save_game() -> void:
 	var scene := get_tree().current_scene
-	
 	var data := {
 		scene = scene.scene_file_path,
 		status = PlayerStatus.to_dict(),
@@ -94,7 +94,6 @@ func load_game() -> void:
 	time_system.date_time.days = data.date_time.days
 	time_system.date_time.hours = data.date_time.hours
 	time_system.date_time.minutes = data.date_time.minutes
-	
 	change_scene(data.scene, {
 		direction = data.player.direction,
 		position = Vector2(
