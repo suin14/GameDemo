@@ -14,7 +14,6 @@ var itemInHand: ItemStackGui
 var old_index: int = -1
 var locked: bool = false
 
-
 func _ready() -> void:
 	hide()
 	item_view.hide()
@@ -52,7 +51,7 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if itemInHand and event.is_action_pressed("ui_cancel") and !locked:
+	if itemInHand and event.is_action_pressed("right_click") and !locked:
 		replaceItem()
 
 	if event.is_action_pressed("toggle_inventory") and inventory_gui.visible == true:
