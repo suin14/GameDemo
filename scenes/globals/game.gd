@@ -7,6 +7,7 @@ const CONFIG_PATH := "user://config.ini"
 @onready var time_system: TimeSystem = $TimeSystem
 @onready var time_gui: Control = $UI/TimeGUI
 @onready var default_player_status: Dictionary = PlayerStatus.init_status()
+@onready var inventory: Inventory = preload("res://content/data/player_inventory.tres")
 
 var can_interact: bool = true
 
@@ -66,6 +67,7 @@ func new_game() -> void:
 
 func save_game() -> void:
 	var scene := get_tree().current_scene
+	#var inventory : Inventory = get_tree().current_scene.player.inventory
 	var data := {
 		scene = scene.scene_file_path,
 		status = PlayerStatus.to_dict(),
@@ -76,7 +78,8 @@ func save_game() -> void:
 				x = scene.player.global_position.x,
 				y = scene.player.global_position.y
 			}
-		}
+		},
+		inventory = scene.player.inventory.to_dict()
 	}
 	var json := JSON.stringify(data)
 	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
@@ -95,6 +98,7 @@ func load_game() -> void:
 	time_system.date_time.days = data.date_time.days
 	time_system.date_time.hours = data.date_time.hours
 	time_system.date_time.minutes = data.date_time.minutes
+	
 	change_scene(data.scene, {
 		direction = data.player.direction,
 		position = Vector2(
@@ -104,6 +108,7 @@ func load_game() -> void:
 		init = func():
 			PlayerStatus.from_dict(data.status)
 			time_system.from_dict(data.date_time)
+			inventory.from_dict(data.inventory)
 	})
 
 func has_save() -> bool:

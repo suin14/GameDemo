@@ -24,3 +24,27 @@ func removeSlot(inventorySlot: InventorySlot):
 
 func insertSlot(new_index: int, inventorySlot: InventorySlot):
 	slots[new_index] = inventorySlot
+
+
+func to_dict() -> Dictionary:
+	var dict: Dictionary = {}
+	for i in range(slots.size()):
+		var item_name = "null"
+		if slots[i].item != null:
+			item_name = slots[i].item.name
+		dict[i] = {
+			"item_name": item_name,
+			"amount": slots[i].amount
+		}
+	return dict
+
+
+func from_dict(dict: Dictionary) -> void:
+	for i in range(slots.size()):
+		if dict.has(str(i)):
+			var item_resource = load("res://content/objects/" + dict[str(i)].item_name + ".tres")
+			if item_resource != null:
+				slots[i].item = item_resource
+			slots[i].amount = dict[str(i)].amount
+
+
