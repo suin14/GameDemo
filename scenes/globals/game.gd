@@ -62,6 +62,7 @@ func new_game() -> void:
 			time_system.date_time.days = 1
 			time_system.date_time.hours = 0
 			time_system.date_time.minutes = 0
+			inventory.init()
 	})
 
 

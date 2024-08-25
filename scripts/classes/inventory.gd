@@ -48,3 +48,7 @@ func from_dict(dict: Dictionary) -> void:
 			slots[i].amount = dict[str(i)].amount
 
 
+func init() -> void:
+	for i in range(slots.size()):
+		slots[i].item = null
+		slots[i].amount = 0
