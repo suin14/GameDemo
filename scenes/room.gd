@@ -27,7 +27,6 @@ func _ready() -> void:
 		SoundManager.play_bgm(bgm)
 
 
-
 func update_player(pos: Vector2) -> void:
 	player.global_position = pos
 	camera_2d.reset_smoothing()
