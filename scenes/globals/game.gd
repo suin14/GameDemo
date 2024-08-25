@@ -10,6 +10,7 @@ const CONFIG_PATH := "user://config.ini"
 
 var can_interact: bool = true
 
+
 func _ready() -> void:
 	black.color.a = 0
 	Game.load_config()
@@ -39,7 +40,7 @@ func change_scene(path: String, params := {}) -> void:
 					break
 		
 		if "position" in params:
-			print("change_scene.pos：" + str(params.position))
+			await tree.current_scene.ready
 			tree.current_scene.update_player(params.position)
 
 	tree.paused = false

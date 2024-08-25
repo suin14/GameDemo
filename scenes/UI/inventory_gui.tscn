@@ -170,6 +170,7 @@ layout_mode = 2
 
 [node name="ItemView" type="CanvasLayer" parent="."]
 layer = 10
+visible = false
 
 [node name="ItemViewBox" type="TextureRect" parent="ItemView"]
 offset_left = 223.0

@@ -6,8 +6,10 @@ extends Node2D
 @onready var player: Player = $player
 @onready var tile_map: TileMap = $TileMap
 @onready var camera_2d: Camera2D = $player/Camera2D
+@onready var room: Locations = $"."
 
 var offset: int = 0
+
 
 func _ready() -> void:
 	#相机极限
@@ -24,8 +26,9 @@ func _ready() -> void:
 	if bgm:
 		SoundManager.play_bgm(bgm)
 
+
+
 func update_player(pos: Vector2) -> void:
-	print("update_player.pos：" + str(pos))
 	player.global_position = pos
-	#camera_2d.reset_smoothing()
-	#camera_2d.force_update_scroll()
+	camera_2d.reset_smoothing()
+	camera_2d.force_update_scroll()
