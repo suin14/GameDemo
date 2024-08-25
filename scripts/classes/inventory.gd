@@ -41,7 +41,7 @@ func to_dict() -> Dictionary:
 
 func from_dict(dict: Dictionary) -> void:
 	for i in range(slots.size()):
-		if dict.has(str(i)):
+		if dict.has(str(i)) and dict[str(i)].item_name != "null":
 			var item_resource = load("res://content/objects/" + dict[str(i)].item_name + ".tres")
 			if item_resource != null:
 				slots[i].item = item_resource

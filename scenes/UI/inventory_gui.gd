@@ -167,7 +167,7 @@ func viewsItem(slot):
 	if itemInHand or slot.isEmpty(): 
 		item_view.hide()
 		return
-	showItemView(slot.itemStackGui.inventorySlot.item.name, slot.itemStackGui.inventorySlot.item.description)
+	showItemView(slot.itemStackGui.inventorySlot.item.display_name, slot.itemStackGui.inventorySlot.item.description)
 	item_view_box.position = slot.global_position + slot.size
 
 func showItemView(item_name: String, item_description: String):
